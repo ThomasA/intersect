@@ -13,13 +13,13 @@ except IndexError:
     print("You must supply the paths to two folders to compare")
     sys.exit(1)
 else:
-    files1 = [member for member in dir1 if os.path.isfile('{}/{}'.format(sys.argv[1], member))]
-    files2 = [member for member in dir2 if os.path.isfile('{}/{}'.format(sys.argv[2], member))]
+    files1 = [member for member in dir1 if
+              os.path.isfile('{}/{}'.format(sys.argv[1], member))]
+    files2 = [member for member in dir2 if
+              os.path.isfile('{}/{}'.format(sys.argv[2], member))]
     intersection = set(files1) & set(files2)
     if len(intersection):
         for member in intersection:
             print(member)
     else:
         print("-- Empty intersection --")
-    #for member in dir1:
-    #    print('{}/{} is a file: {}'.format(sys.argv[1], member, 'yes' if os.path.isfile('{}/{}'.format(sys.argv[1], member)) else 'no'))
