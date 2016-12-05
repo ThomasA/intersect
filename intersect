@@ -2,6 +2,7 @@
 
 import sys
 import os
+import errno
 
 
 def files(folder):
@@ -12,9 +13,12 @@ def files(folder):
 try:
     files1 = files(sys.argv[1])
     files2 = files(sys.argv[2])
-except FileNotFoundError:
-    print("One or both of the supplied folder names was not found")
-    sys.exit(1)
+except OSError as e:
+    if e.errno == errno.ENOENT:
+        print("One or both of the supplied folder names was not found")
+        sys.exit(1)
+    else:
+        raise e
 except IndexError:
     print("You must supply the paths to two folders to compare")
     sys.exit(1)
