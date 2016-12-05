@@ -19,7 +19,7 @@ except IndexError:
     print("You must supply the paths to two folders to compare")
     sys.exit(1)
 else:
-    intersection = set(files1) & set(files2)
+    intersection = files1.intersection(files2)
     if len(intersection):
         for member in intersection:
             print(member)
