@@ -3,9 +3,15 @@
 import sys
 import os
 
+
+def files(folder):
+    files_and_folders = os.listdir(folder)
+    return {filename for filename in files_and_folders if
+            os.path.isfile(os.path.join(folder, filename))}
+
 try:
-    dir1 = os.listdir(sys.argv[1])
-    dir2 = os.listdir(sys.argv[2])
+    files1 = files(sys.argv[1])
+    files2 = files(sys.argv[2])
 except FileNotFoundError:
     print("One or both of the supplied folder names was not found")
     sys.exit(1)
@@ -13,10 +19,6 @@ except IndexError:
     print("You must supply the paths to two folders to compare")
     sys.exit(1)
 else:
-    files1 = [member for member in dir1 if
-              os.path.isfile(os.path.join(sys.argv[1], member))]
-    files2 = [member for member in dir2 if
-              os.path.isfile(os.path.join(sys.argv[2], member))]
     intersection = set(files1) & set(files2)
     if len(intersection):
         for member in intersection:
